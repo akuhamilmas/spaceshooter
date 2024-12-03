@@ -1,0 +1,158 @@
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+    
+class LinearSLL:
+    # constructor
+    def __init__(self):
+        self.head = None
+    
+    # ini gi gunakan untuk tambah depan 
+    def addFront(self,data):
+        newNode = Node(data)
+        newNode.next = self.head
+        self.head = newNode
+    
+    def addBack(self,data):
+        newNode = Node(data)
+        temp = self.head
+        if self.head is None:
+            self.head = newNode
+        else:
+            while temp.next:
+                temp = temp.next
+            temp.next = newNode
+
+    def removeFront(self):
+        if self.head is None:
+            print("SLL is empty!!")
+        else:
+            self.head = self.head.next
+            print("front data removed!!")
+
+    def removeBack(self):
+        if self.head is None: #pengecekkan untuk saat Linked List masih kosong
+            print("SLL is empty!!")
+        elif self.head.next is None: #pengecekkan saat linked list hanya ada 1 data
+            self.head = None
+            print("back Data removed!")
+        else:
+            temp = self.head
+            
+            while temp.next is not None:
+                left = temp
+                temp = temp.next
+            left.next = None
+            print("Back Data Removed!")
+            
+
+    def print(self):
+        temp = self.head
+        if temp is None:
+            print("SLL is empty!!")
+        while temp:
+            if(temp.next == None):
+                print(temp.data)
+            else:
+                print(temp.data,end="->")
+            temp = temp.next
+
+
+
+
+    def addIndex(self,index,data):
+        if index <0:
+            print(" mana ada index min 1 boss")
+            return 
+        if index == 0:
+            self.addFront(data)
+            return
+        
+        newNode= Node(data)
+        temp = self.head
+        count= 0
+        while temp and count < index-1:
+            temp= temp.next
+            count +=1
+        if not temp:
+            print("index keluar batas broo")
+            return
+        newNode.next= temp.next
+        temp.next = newNode
+    
+    
+    
+    def removeIndex(self,index):
+        if index < 0 or not self.head:
+             print("yang bener boss indec nya ga ada atau listnya kosong")
+             return   
+        if index == 0:
+            self.removeFront
+            return
+        
+        temp= self.head
+        count = 0
+        while temp and count < index-1:
+            temp=temp.next
+            count += 1
+        if not temp or not temp.next:
+            print(" index out of the bound")
+            return
+        temp.next= temp.next.next    
+    
+    def editIndex(self,index,newdata):
+        if index<0 or not self.head:
+            print ("invalid index or empty list")
+            return
+        temp = self.head
+        count = 0
+        while temp and count < index:
+            temp = temp.next
+            count+=1
+        if not temp:
+            print("index out of the bound")
+            return
+        temp.data = newdata    
+        
+            
+lsll = LinearSLL()
+lsll.addBack(10)
+lsll.addBack(20)
+lsll.addBack(30)
+lsll.print()  # Output: 10->20->30
+
+lsll.addAtIndex(1, 15)
+lsll.print()  # Output: 10->15->20->30
+
+lsll.removeAtIndex(2)
+lsll.print()  # Output: 10->15->30
+
+lsll.editAtIndex(0, 5)
+lsll.print()  # Output: 5->15->30
+
+            
+
+
+
+lsll = LinearSLL()
+lsll.addBack(10)
+lsll.print()
+lsll.addFront(100)
+lsll.addFront("hello")
+lsll.print()
+lsll.removeFront()
+lsll.addBack(50)
+lsll.addBack(150)
+lsll.print()
+lsll.removeBack()
+lsll.print()
+lsll.removeFront()
+lsll.print()
+lsll.removeBack()
+lsll.print()
+lsll.removeFront()
+lsll.print()
+
+
+
